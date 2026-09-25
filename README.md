@@ -1,2 +1,2 @@
-# factory-tracker-clean
+# Factory Inventory Tracker and Production Management 
 
