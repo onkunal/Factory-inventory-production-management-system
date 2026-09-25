@@ -1,0 +1,7 @@
+# Disable directory browsing
+Options -Indexes
+
+# Block direct access to the raw SQL schema file
+<FilesMatch "\.(sql|md)$">
+    Require all denied
+</FilesMatch>

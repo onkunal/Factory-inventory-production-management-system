@@ -1,0 +1,16 @@
+# OS junk
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Local env / secrets (if you later move DB creds here)
+.env
+config/local.php
+
+# Logs
+*.log

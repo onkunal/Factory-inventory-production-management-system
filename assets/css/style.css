@@ -1,0 +1,628 @@
+/* =====================================================================
+   Factory Inventory & Production Tracker
+   CLEAN LIGHT PASTEL THEME — complete replacement stylesheet
+   (scraps the previous visionOS glass theme entirely)
+   CSS / JS only. No PHP logic changes. Loads after Bootstrap 5.3, so
+   plain selectors here win the cascade; a few Bootstrap *utility*
+   classes (bg-white, bg-light, text-dark, ...) ship as !important and
+   are called out below where that matters.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. THEME VARIABLES
+   --------------------------------------------------------------------- */
+:root {
+    --page-bg:        #f0f2f5;
+    --sidebar-bg:     #ffffff;
+    --card-bg:        #ffffff;
+    --input-bg:       #ffffff;
+
+    --border-light:   #e8ecf1;
+    --border-input:   #d1d5db;
+
+    --accent:         #6c9bcf;
+    --accent-hover:   #5a8abf;
+    --accent-tint:    #e3eefa;
+    --accent-tint-soft: #f0f7ff;
+    --accent-text:    #4a7ba7;
+
+    --pastel-blue:    #a8d5e2;
+    --pastel-green:   #a8e6cf;
+    --pastel-yellow:  #ffd3b4;
+    --pastel-red:     #ff8a8a;
+
+    --btn-primary:    #6c9bcf;
+    --btn-primary-hover: #5a8abf;
+    --btn-success:    #7bc8a4;
+    --btn-success-hover: #67b892;
+    --btn-danger:     #e88383;
+    --btn-danger-hover: #dd6f6f;
+    --btn-warning:    #f5b878;
+    --btn-warning-hover: #eda65c;
+
+    --text-heading:   #2c3e50;
+    --text-body:      #333333;
+    --text-secondary: #666666;
+    --text-muted-dk:  #8a94a3;
+
+    --low-stock-bg:   #fff0f0;
+    --row-alt:        #fafbfc;
+    --row-hover:      #f0f7ff;
+    --table-head-bg:  #f8f9fa;
+
+    --radius-card:    16px;
+    --radius-btn:     8px;
+    --radius-input:   8px;
+
+    --shadow-card:    0 2px 12px rgba(0, 0, 0, 0.06);
+    --shadow-card-hover: 0 6px 20px rgba(0, 0, 0, 0.09);
+
+    --transition-fast: 0.2s ease;
+    --transition-med:  0.25s ease;
+}
+
+/* ---------------------------------------------------------------------
+   2. GLOBAL / TYPOGRAPHY
+   --------------------------------------------------------------------- */
+body {
+    background-color: var(--page-bg);
+    color: var(--text-body);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-heading);
+    font-weight: 700;
+}
+
+p {
+    color: var(--text-body);
+}
+
+label,
+.form-label {
+    color: var(--text-body);
+    font-weight: 500;
+}
+
+a {
+    color: var(--accent-text);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+::selection {
+    background-color: var(--accent-tint);
+    color: var(--text-heading);
+}
+
+/* ---------------------------------------------------------------------
+   3. TOP NAVBAR
+   --------------------------------------------------------------------- */
+.app-navbar {
+    background-color: #ffffff;
+    height: 60px;
+    border-bottom: 1px solid var(--border-light);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.app-navbar .navbar-brand,
+.app-navbar .navbar-brand i {
+    color: var(--text-heading);
+    font-weight: 700;
+}
+
+/* ---------------------------------------------------------------------
+   4. LAYOUT
+   --------------------------------------------------------------------- */
+.app-wrapper {
+    min-height: calc(100vh - 60px);
+}
+
+.app-content {
+    min-width: 0; /* allow tables to shrink/scroll instead of overflowing */
+    padding: 1.5rem;
+    animation: fadeSlideUp 0.35s ease both;
+}
+
+/* ---------------------------------------------------------------------
+   5. SIDEBAR
+   --------------------------------------------------------------------- */
+.app-sidebar {
+    width: 240px;
+    min-width: 240px;
+    background-color: var(--sidebar-bg);
+    min-height: calc(100vh - 60px);
+    padding-top: 1rem;
+    border-right: 1px solid var(--border-light);
+}
+
+.sidebar-link {
+    color: var(--text-body) !important;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-btn);
+    margin: 0.1rem 0.6rem;
+    border-left: none;
+    transition: background-color var(--transition-fast),
+                color var(--transition-fast);
+}
+
+.sidebar-link i {
+    width: 20px;
+    display: inline-block;
+    color: var(--text-secondary);
+}
+
+.sidebar-link:hover {
+    background-color: var(--page-bg);
+    color: var(--text-heading) !important;
+}
+
+.sidebar-link.active {
+    background-color: var(--accent-tint); /* #E3EEFA */
+    color: var(--accent-text) !important; /* #4A7BA7 */
+    font-weight: 600;
+}
+
+.sidebar-link.active i {
+    color: var(--accent-text);
+}
+
+/* ---------------------------------------------------------------------
+   6. LOGIN PAGE
+   --------------------------------------------------------------------- */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--page-bg);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+    animation: fadeSlideUp 0.35s ease both;
+}
+
+/* ---------------------------------------------------------------------
+   7. CARDS
+   --------------------------------------------------------------------- */
+.card {
+    background-color: var(--card-bg);
+    color: var(--text-body);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow var(--transition-med), transform var(--transition-med);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+}
+
+.card-body,
+.card-footer {
+    color: var(--text-body);
+    background: transparent;
+}
+
+/* Simple divider-style header instead of a dark gradient. Uses
+   !important only where the markup already applies Bootstrap's
+   !important "bg-white" utility class so this still wins cleanly
+   (it's the same color here anyway, so it's mostly a no-op). */
+.card-header {
+    background: #ffffff !important;
+    color: var(--text-heading) !important;
+    border-bottom: 1px solid var(--border-light);
+    border-top-left-radius: var(--radius-card);
+    border-top-right-radius: var(--radius-card);
+    font-weight: 600;
+}
+
+/* ---- Dashboard summary cards — pastel tiles with white text ---- */
+.summary-card {
+    border: none;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    color: #ffffff;
+}
+
+.summary-card .card-header {
+    background: none !important;
+    border-bottom: none;
+}
+
+.summary-card .card-icon {
+    font-size: 2.2rem;
+    opacity: 0.9;
+    color: #ffffff;
+}
+
+.summary-card h2,
+.summary-card h3,
+.summary-card .display-number {
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: #ffffff;
+}
+
+.summary-card .card-label,
+.summary-card small {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.summary-card.bg-materials { background-color: var(--pastel-blue); }   /* Total Raw Materials */
+.summary-card.bg-products  { background-color: var(--pastel-green); }  /* Total Products */
+.summary-card.bg-lowstock  { background-color: var(--pastel-red); }    /* Low Stock */
+.summary-card.bg-po        { background-color: var(--pastel-yellow); } /* Pending POs */
+
+/* ---------------------------------------------------------------------
+   8. BUTTONS — rounded, not pill-shaped
+   --------------------------------------------------------------------- */
+.btn {
+    border-radius: var(--radius-btn);
+    font-weight: 500;
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast),
+                transform var(--transition-fast);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background-color: var(--btn-primary);
+    border-color: var(--btn-primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--btn-primary-hover);
+    border-color: var(--btn-primary-hover);
+    color: #ffffff;
+}
+
+.btn-success {
+    background-color: var(--btn-success);
+    border-color: var(--btn-success);
+    color: #ffffff;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: var(--btn-success-hover);
+    border-color: var(--btn-success-hover);
+    color: #ffffff;
+}
+
+.btn-danger {
+    background-color: var(--btn-danger);
+    border-color: var(--btn-danger);
+    color: #ffffff;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background-color: var(--btn-danger-hover);
+    border-color: var(--btn-danger-hover);
+    color: #ffffff;
+}
+
+.btn-warning {
+    background-color: var(--btn-warning);
+    border-color: var(--btn-warning);
+    color: #ffffff;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: var(--btn-warning-hover);
+    border-color: var(--btn-warning-hover);
+    color: #ffffff;
+}
+
+/* Outline variants used throughout the module CRUD tables/toolbars */
+.btn-outline-light {
+    color: var(--text-body);
+    border-color: var(--border-input);
+    background-color: #ffffff;
+}
+
+.btn-outline-light:hover {
+    background-color: var(--page-bg);
+    color: var(--text-heading);
+}
+
+.btn-outline-primary,
+.btn-outline-info {
+    color: var(--accent-text);
+    border-color: var(--accent);
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-info:hover {
+    background-color: var(--accent);
+    color: #ffffff;
+}
+
+.btn-outline-success {
+    color: var(--btn-success-hover);
+    border-color: var(--btn-success);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--btn-success);
+    color: #ffffff;
+}
+
+.btn-outline-danger {
+    color: var(--btn-danger-hover);
+    border-color: var(--btn-danger);
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--btn-danger);
+    color: #ffffff;
+}
+
+.btn-outline-secondary {
+    color: var(--text-secondary);
+    border-color: var(--border-input);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--page-bg);
+    color: var(--text-heading);
+}
+
+/* ---------------------------------------------------------------------
+   9. FORM FIELDS
+   --------------------------------------------------------------------- */
+.form-control,
+.form-select {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-input);
+    color: var(--text-body);
+    border-radius: var(--radius-input);
+    transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted-dk);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--input-bg);
+    border-color: var(--accent);
+    color: var(--text-body);
+    box-shadow: 0 0 0 3px rgba(108, 155, 207, 0.2); /* soft pastel glow */
+}
+
+.form-select {
+    /* dark arrow reads cleanly against the white/light background */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-check-label {
+    color: var(--text-body);
+}
+
+.form-text {
+    color: var(--text-secondary);
+}
+
+/* ---------------------------------------------------------------------
+   10. TABLES — clean, minimal, no heavy outlines
+   --------------------------------------------------------------------- */
+.table {
+    --bs-table-bg: #ffffff;
+    --bs-table-color: var(--text-body);
+    --bs-table-border-color: var(--border-light);
+    --bs-table-striped-bg: var(--row-alt);
+    --bs-table-striped-color: var(--text-body);
+    --bs-table-hover-bg: var(--row-hover);
+    --bs-table-hover-color: var(--text-heading);
+    color: var(--text-body);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead th {
+    background-color: var(--table-head-bg);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid var(--border-light);
+    border-top: none;
+}
+
+/* Kill Bootstrap's default heavy top border between thead/tbody and
+   the vertical borders on td/th so nothing reads as "outlined". */
+.table > :not(caption) > * > * {
+    border-width: 0 0 1px 0;
+    box-shadow: none;
+}
+
+.table tbody tr {
+    transition: background-color var(--transition-fast);
+}
+
+.table tbody tr:hover {
+    background-color: var(--row-hover);
+}
+
+/* Low stock highlighting — flat pastel red fill, no glow/outline */
+tr.low-stock-row {
+    background-color: var(--low-stock-bg) !important;
+}
+
+.table-actions a,
+.table-actions button {
+    margin-right: 0.25rem;
+}
+
+/* ---------------------------------------------------------------------
+   11. ALERTS / TOAST FLASH MESSAGES — flat pastel, no blur
+   (script.js moves each server-rendered .alert into a fixed top-right
+   container and tags it .app-toast — see script.js comments)
+   --------------------------------------------------------------------- */
+.alert {
+    border: 1px solid transparent;
+    border-radius: var(--radius-input);
+    animation: fadeSlideUp 0.3s ease both; /* fallback if JS hasn't run yet */
+}
+
+.alert-success {
+    background-color: #e6f9ed;
+    color: #1e7a46;
+    border-color: #c9f0d9;
+}
+
+.alert-danger {
+    background-color: #ffeaea;
+    color: #b23b3b;
+    border-color: #ffd6d6;
+}
+
+.alert-warning {
+    background-color: #fff4e6;
+    color: #a15c0f;
+    border-color: #ffe3c2;
+}
+
+.alert-info {
+    background-color: #e8f0fe;
+    color: #2c5faa;
+    border-color: #d3e3fb;
+}
+
+.alert .btn-close {
+    filter: none; /* default dark close icon reads fine on pastel backgrounds */
+}
+
+.app-toast-container {
+    position: fixed;
+    top: 76px; /* clears the 60px top navbar */
+    right: 1.25rem;
+    z-index: 1080;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 380px;
+    width: calc(100% - 2.5rem);
+}
+
+.app-toast {
+    animation: toastSlideIn 0.3s ease both;
+    box-shadow: var(--shadow-card);
+}
+
+/* ---------------------------------------------------------------------
+   12. MISC
+   --------------------------------------------------------------------- */
+.required-field::after {
+    content: " *";
+    color: var(--btn-danger);
+}
+
+.text-muted {
+    color: var(--text-muted-dk) !important;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-card);
+    color: var(--text-body);
+}
+
+.modal-header,
+.modal-footer {
+    border-color: var(--border-light);
+}
+
+.badge {
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 0.4em 0.75em;
+}
+
+/* Footer / brand credit line (see chat notes re: header.php/footer.php) */
+.app-footer,
+.footer-credit {
+    color: var(--text-muted-dk);
+    font-size: 0.85rem;
+}
+
+/* ---------------------------------------------------------------------
+   13. KEYFRAMES
+   --------------------------------------------------------------------- */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ---------------------------------------------------------------------
+   14. REDUCED MOTION
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .app-content,
+    .login-card,
+    .card,
+    .alert,
+    .app-toast {
+        animation: none !important;
+    }
+
+    .btn:hover,
+    .card:hover {
+        transform: none !important;
+    }
+}
+
+/* ---------------------------------------------------------------------
+   15. RESPONSIVE
+   --------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .app-sidebar {
+        width: 100%;
+        min-width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+    }
+}
